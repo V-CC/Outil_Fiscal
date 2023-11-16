@@ -10,7 +10,7 @@ with col2 :
 
 st.subheader("")
 revenu_brut = st.number_input("Revenu annuel brut en € : ")
-revenu = revenu_brut/1.23
+revenu = revenu_brut-revenu_brut*0.23
 
 result = 0
 
