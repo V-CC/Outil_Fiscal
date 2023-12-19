@@ -61,6 +61,8 @@ symboles_indices = {"S&P500": "^GSPC", "Dow Jones": "^DJI", "CAC40": "^FCHI"}
 # Téléchargement des données depuis Yahoo Finance
 indice_data = yf.download(symboles_indices[indice_selectionne], start="2022-01-01", end="2023-01-01", utc=True)
 
+indice_data.reset_index(inplace=True)
+
 # Affichage du graphique avec Plotly Express
 fig = px.line(indice_data, x="Date", y="Close", title=f"{indice_selectionne} - Évolution du cours")
 st.plotly_chart(fig, use_container_width=True)
