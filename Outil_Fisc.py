@@ -2,6 +2,8 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 import plotly.express as px
+import matplotlib.pyplot as plt
+from io import BytesIO
 
 Bleu = '#0D2A59'
 Rouge = '#E61434'
@@ -49,12 +51,6 @@ with col1:
 with col2:
     st.metric(label="Revenu net sur 13 mois après IR", value=round((revenu/13)-(result/12),2), delta="en €")
 
-
-import streamlit as st
-import yfinance as yf
-import pandas as pd
-import matplotlib.pyplot as plt
-from io import BytesIO
 
 # Titre de l'application
 st.title("Évolution des indices boursiers")
