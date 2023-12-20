@@ -50,19 +50,31 @@ with col2:
     st.metric(label="Revenu net sur 13 mois après IR", value=round((revenu/13)-(result/12),2), delta="en €")
 
 
+import streamlit as st
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+from io import BytesIO
+
+# Titre de l'application
 st.title("Évolution des indices boursiers")
 
-# Sélection de l'indice
-indice_selectionne = st.selectbox("Sélectionnez l'indice :", ["S&P500", "Dow Jones", "CAC40"])
+# Barre de menu à gauche
+st.sidebar.header("Menu")
+indice_selectionne = st.sidebar.selectbox("Sélectionnez l'indice :", ["S&P500", "Dow Jones", "CAC40"])
 
 # Définition des symboles des indices
 symboles_indices = {"S&P500": "^GSPC", "Dow Jones": "^DJI", "CAC40": "^FCHI"}
 
 # Téléchargement des données depuis Yahoo Finance
-indice_data = yf.download(symboles_indices[indice_selectionne], start="2022-01-01", end="2023-01-01", utc=True)
+indice_data = yf.download(symboles_indices[indice_selectionne], start="2022-01-01", end="2023-01-01")
 
-indice_data.reset_index(inplace=True)
+# Créer le graphique avec Matplotlib
+fig, ax = plt.subplots()
+ax.plot(indice_data.index, indice_data["Close"])
+ax.set_title(f"{indice_selectionne} - Évolution du cours")
+ax.set_xlabel("Date")
+ax.set_ylabel("Close")
 
-# Affichage du graphique avec Plotly Express
-fig = px.line(indice_data, x="Date", y="Close", title=f"{indice_selectionne} - Évolution du cours")
-st.plotly_chart(fig, use_container_width=True)
+# Afficher le graphique dans Streamlit
+st.pyplot(fig)
