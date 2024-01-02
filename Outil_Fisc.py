@@ -28,7 +28,7 @@ elif revenu < 177106 and revenu > 82341:
 elif revenu < 82341 and revenu > 28797:
     ip = (28797-11294)*0.11 + (revenu-28797)*0.3
 
-elif revenu < 28797 and revenu > 11294:
+elif revenu < 28798 and revenu > 11294:
     ip = (revenu-11294)*0.11
 
 else:
